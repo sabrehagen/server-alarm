@@ -1,0 +1,27 @@
+{
+  "name": "server-alarm",
+  "version": "1.0.0",
+  "description": "Sound an alarm when production stops producing.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sabrehagen/server-alarm.git"
+  },
+  "keywords": [
+    "serer",
+    "alarm"
+  ],
+  "author": "Jackson Delahunt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sabrehagen/server-alarm/issues"
+  },
+  "homepage": "https://github.com/sabrehagen/server-alarm#readme",
+  "dependencies": {
+    "needle": "^0.10.0",
+    "play-sound": "0.0.5"
+  }
+}
