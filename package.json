@@ -21,7 +21,6 @@
   },
   "homepage": "https://github.com/sabrehagen/server-alarm#readme",
   "dependencies": {
-    "needle": "^0.10.0",
-    "play-sound": "0.0.5"
+    "needle": "^0.10.0"
   }
 }

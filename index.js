@@ -1,5 +1,4 @@
-//var player = require('play-sound')(opts = {})
-var player = require('play-sound')()
+var exec = require('child_process').exec;
 var needle = require('needle');
 
 function pingServer(callback) {
@@ -16,7 +15,7 @@ function checkServer() {
             if (success) {
                 checkServer()
             } else {
-                player.play('alarm.mp3');
+                exec('wmplayer alarm.mp3');
             }
         });
     }, 30000);
