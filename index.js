@@ -2,7 +2,7 @@ var exec = require('child_process').execFile;
 var needle = require('needle');
 
 function pingServer(callback) {
-    needle.get('http://119.9.25.43/api/v1/users/jacksondelahunt', (error, response) => {
+    needle.get('http://119.9.25.43/api/v1/users/jacksondelahunt', function(error, response) {
         callback(!error
             && response.statusCode == 200
             && response.body.name
@@ -11,7 +11,7 @@ function pingServer(callback) {
 }
 
 function playAlarm() {
-    exec('c:\\Program Files\\Windows Media Player\\wmplayer.exe', [__dirname + '\\alarm.mp3'], function() {});
+    exec('c:\\Program Files\\Windows Media Player\\wmplayer.exe', [__dirname + '\\alarm.mp3']);
 }
 
 function stopAlarm() {
@@ -19,8 +19,8 @@ function stopAlarm() {
 }
 
 function checkServer() {
-    setTimeout(() => {
-        pingServer((success) => {
+    setTimeout(function() {
+        pingServer(function(success) {
             if (!success) {
                 playAlarm();
             } else {
