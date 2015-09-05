@@ -13,10 +13,10 @@ function checkServer() {
     setTimeout(() => {
         pingServer((success) => {
             if (success) {
-                checkServer()
+                checkServer();
             } else {
                 exec('wmplayer alarm.mp3');
             }
         });
-    }, 30000);
+    }, 1000);
 }
