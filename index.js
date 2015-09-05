@@ -1,22 +1,34 @@
-var exec = require('child_process').exec;
+var exec = require('child_process').execFile;
 var needle = require('needle');
 
 function pingServer(callback) {
     needle.get('http://119.9.25.43/api/v1/users/jacksondelahunt', (error, response) => {
         callback(!error
             && response.statusCode == 200
-            && response.body.indexOf('Delahunt') > -1);
+            && response.body.name
+            && response.body.name.includes('Delahunt'));
     });    
+}
+
+function playAlarm() {
+    exec('c:\\Program Files\\Windows Media Player\\wmplayer.exe', [__dirname + '\\alarm.mp3'], function() {});
+}
+
+function stopAlarm() {
+    exec('taskkill', ['/f', '/im', 'wmplayer.exe']);
 }
 
 function checkServer() {
     setTimeout(() => {
         pingServer((success) => {
-            if (success) {
-                checkServer();
+            if (!success) {
+                playAlarm();
             } else {
-                exec('wmplayer alarm.mp3');
+                stopAlarm();
             }
+            checkServer();
         });
     }, 1000);
 }
+
+checkServer();
