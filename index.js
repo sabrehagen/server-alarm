@@ -2,7 +2,7 @@ var exec = require('child_process').execFile;
 var needle = require('needle');
 
 function pingServer(callback) {
-    needle.get('http://119.9.25.43/api/v1/users/jacksondelahunt', function(error, response) {
+    needle.get('http://119.9.25.43/api/v1/users/jackson', function(error, response) {
         callback(!error
             && response.statusCode == 200
             && response.body.name
