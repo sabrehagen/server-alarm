@@ -19,16 +19,21 @@ function stopAlarm() {
 }
 
 function checkServer() {
+    var failureCount = 0;
+    var pingInterval = 3000;
     setTimeout(function() {
         pingServer(function(success) {
             if (!success) {
-                playAlarm();
+                failureCount++;
+                if (failureCount > 5)
+                    playAlarm();
             } else {
+                failureCount = 0;
                 stopAlarm();
             }
             checkServer();
         });
-    }, 1000);
+    }, pingInterval);
 }
 
 checkServer();
