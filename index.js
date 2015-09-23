@@ -18,8 +18,8 @@ function stopAlarm() {
     exec('taskkill', ['/f', '/im', 'wmplayer.exe']);
 }
 
+var failureCount = 0;
 function checkServer() {
-    var failureCount = 0;
     var pingInterval = 3000;
     setTimeout(function() {
         pingServer(function(success) {
