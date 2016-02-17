@@ -11,13 +11,9 @@ const pingServer = (callback) => {
     });
 }
 
-const playAlarm = () => {
-    exec('c:\\Program Files\\Windows Media Player\\wmplayer.exe', [__dirname + '\\alarm.mp3']);
-}
+const playAlarm = () => exec('c:\\Program Files\\Windows Media Player\\wmplayer.exe', [__dirname + '\\alarm.mp3']);
 
-const stopAlarm = () => {
-    exec('taskkill', ['/f', '/im', 'wmplayer.exe']);
-}
+const stopAlarm = () => exec('taskkill', ['/f', '/im', 'wmplayer.exe']);
 
 const checkServer = (failureCount) => {
     setTimeout(() => {
