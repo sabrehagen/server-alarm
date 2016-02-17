@@ -1,8 +1,9 @@
-var exec = require('child_process').execFile;
-var needle = require('needle');
+const exec = require('child_process').execFile;
+const needle = require('needle');
+const pingInterval = 3000;
 
-function pingServer(callback) {
-    needle.get('http://104.239.249.254/api/v1/users/jackson', function(error, response) {
+const pingServer = (callback) => {
+    needle.get('https://stemn.com/api/v1/users/jackson', (error, response) => {
         callback(!error
             && response.statusCode == 200
             && response.body.name
@@ -10,30 +11,29 @@ function pingServer(callback) {
     });
 }
 
-function playAlarm() {
+const playAlarm = () => {
     exec('c:\\Program Files\\Windows Media Player\\wmplayer.exe', [__dirname + '\\alarm.mp3']);
 }
 
-function stopAlarm() {
+const stopAlarm = () => {
     exec('taskkill', ['/f', '/im', 'wmplayer.exe']);
 }
 
-var failureCount = 0;
-function checkServer() {
-    var pingInterval = 3000;
-    setTimeout(function() {
-        pingServer(function(success) {
+const checkServer = (failureCount) => {
+    setTimeout(() => {
+        pingServer((success) => {
             if (!success) {
-                failureCount++;
-                if (failureCount > 5)
+                if (failureCount > 5) {
                     playAlarm();
+                }
+                checkServer(failureCount + 1);
             } else {
-                failureCount = 0;
                 stopAlarm();
+                checkServer(0);
             }
-            checkServer();
         });
     }, pingInterval);
 }
 
-checkServer();
+const initialFailureCount = 0;
+checkServer(initialFailureCount);
